@@ -1,0 +1,40 @@
+# csr-frontend
+import React, { useState, useEffect } from 'react';
+
+function App() {
+  const [data1, setData1] = useState([]);
+  const [data2, setData2] = useState([]);
+
+  useEffect(() => {
+    fetch('data1.json')
+      .then(response => response.json())
+      .then(data => setData1(data));
+  }, []);
+
+  useEffect(() => {
+    fetch('data2.json')
+      .then(response => response.json())
+      .then(data => setData2(data));
+  }, []);
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Column 1</th>
+          <th>Column 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data1.map((item, index) => (
+          <tr key={index}>
+            <td>{item.field1}</td>
+            <td>{data2[index].field1}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export default App;
